@@ -1,0 +1,12 @@
+{
+  "name": "twentytwenty-proton",
+  "description": "Before/After Gallery using a custom version of jquerys twentytwenty plugin",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "twentytwenty": "https://github.com/zurb/twentytwenty.git",
+    "Proton": "https://github.com/a-jie/Proton.git"
+  }
+}
