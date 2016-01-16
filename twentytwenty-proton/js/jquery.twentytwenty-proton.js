@@ -1,8 +1,9 @@
 /** TwentyTwentyProton jQuery Module */
 (function($){
 	$.fn.twentytwentyproton = function(options) {
-		var options = $.extend({'proton':true,'fullscreen':true,'description':null,'quickslide':true}, options);
+		var options = $.extend({'particle':null,'proton':true,'fullscreen':true,'description':null,'quickslide':true}, options);
 		return this.each(function() {
+			if (!options.particle) return;
 			var container = $(this).twentytwenty(options);
 			container.addClass('twentytwenty-proton');
 			var overlay = container.find(".twentytwenty-overlay");
@@ -35,7 +36,7 @@
 					emitter = new Proton.Emitter();
 					emitter.rate = new Proton.Rate(new Proton.Span(5, 10), new Proton.Span(.01, .015));
 					emitter.addInitialize(new Proton.Life(.1, 0.5));
-					emitter.addInitialize(new Proton.ImageTarget(['/wp-content/plugins/twentytwenty-proton/twentytwenty-proton/img/particle.png'], 32));
+					emitter.addInitialize(new Proton.ImageTarget([options.particle], 32));
 					emitter.addBehaviour(new Proton.Alpha(1, 0));
 					emitter.addBehaviour(new Proton.Color('#E374F7', '#E374F7'));
 					emitter.p.x = canvas.width() / 2;
@@ -51,7 +52,7 @@
 					});
 					tick();
 				}
-				image.src = '/wp-content/plugins/twentytwenty-proton/twentytwenty-proton/img/particle.png';
+				image.src = options.particle;
 			}
 
 			if (options.fullscreen)

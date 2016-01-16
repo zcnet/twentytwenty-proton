@@ -29,14 +29,14 @@ add_action('wp_head', 'twentytwentyproton_head');
 function twentytwentyproton_head()
 {
 	echo "
-		<link href='/wp-content/plugins/twentytwenty-proton/bower_components/twentytwenty/css/twentytwenty.css' rel='stylesheet' type='text/css'>
-		<script src='/wp-content/plugins/twentytwenty-proton/bower_components/twentytwenty/js/jquery.event.move.js'></script>
-		<script src='/wp-content/plugins/twentytwenty-proton/bower_components/twentytwenty/js/jquery.twentytwenty.js'></script>
+		<link href='".plugin_dir_url(__FILE__)."bower_components/twentytwenty/css/twentytwenty.css' rel='stylesheet' type='text/css'>
+		<script src='".plugin_dir_url(__FILE__)."bower_components/twentytwenty/js/jquery.event.move.js'></script>
+		<script src='".plugin_dir_url(__FILE__)."bower_components/twentytwenty/js/jquery.twentytwenty.js'></script>
 
-		<script src='/wp-content/plugins/twentytwenty-proton/bower_components/Proton/build/proton-1.0.0.min.js'></script>
+		<script src='".plugin_dir_url(__FILE__)."bower_components/Proton/build/proton-1.0.0.min.js'></script>
 
-		<link href='/wp-content/plugins/twentytwenty-proton/twentytwenty-proton/css/twentytwenty-proton.css' rel='stylesheet' type='text/css'>
-		<script src='/wp-content/plugins/twentytwenty-proton/twentytwenty-proton/js/jquery.twentytwenty-proton.js'></script>
+		<link href='".plugin_dir_url(__FILE__)."twentytwenty-proton/css/twentytwenty-proton.css' rel='stylesheet' type='text/css'>
+		<script src='".plugin_dir_url(__FILE__)."twentytwenty-proton/js/jquery.twentytwenty-proton.js'></script>
 	";
 }
 
@@ -58,67 +58,41 @@ function twentytwentyproton($attrs)
 	//check if image ids are set
 	if (!empty($attrs["ids"]))
 	{
-		//request images by id
-		$images = twentytwentyproton_get_images($attrs["ids"]);
-		//check if there are exactly two images
-		if (count($images) == 2)
+		//explode ids and make sure there are exactly two
+		$ids = explode(",",$attrs["ids"]);
+		if (count($ids) == 2)
 		{
+			pr($attrs);
+			//get images info
+			$images = array(
+				wp_get_attachment_image_src($ids[0],$attrs["size"]),
+				wp_get_attachment_image_src($ids[1],$attrs["size"]),
+			);
 			//generate unique id for dom elements
 			$uniqid = uniqid();
 			//initialize markup and javascript
 			$content = "
 				<script type='text/javascript'>
 					window.addEventListener('load',function(){
-						jQuery('#".$uniqid."').show().twentytwentyproton({fullscreen:false});
+						jQuery('#".$uniqid."').show().twentytwentyproton({
+							particle:'".plugin_dir_url(__FILE__)."twentytwenty-proton/img/particle.png',
+							fullscreen:false
+						});
 					});
 				</script>
-				<div id='".$uniqid."' style='display:none; width:100%;'>
-					<img src='".$images[0]["guid"]."' />
-					<img src='".$images[1]["guid"]."' />
+				<div id='".$uniqid."' style='display:none; width:".max($images[0][1],$images[1][1])."px;'>
+					<img src='".$images[0][0]."' width='".$images[0][1]."' height='".$images[0][2]."' />
+					<img src='".$images[1][0]."' width='".$images[1][1]."' height='".$images[1][2]."' />
 				</div>
 			";
 		}
 	}
-
 	return($content);
-}
-
-/**
- * Load Images by id from database
- * @param type $ids 
- * @return type
- */
-function twentytwentyproton_get_images($ids)
-{
-	//sainitize input data
-	$ids = mysql_real_escape_string($ids);
-	//prepare images array
-	$images = array();
-	//construct sql query
-	$query = "
-		SELECT *
-		FROM wp_posts
-		WHERE
-			id IN (".$ids.")
-		ORDER BY
-			(id=".implode(") DESC,(id=",explode(",",$ids)).") DESC
-		LIMIT 2
-	";
-	//execute sql query
-	$res = mysql_query($query);
-	//loop query results
-	while($node = mysql_fetch_assoc($res))
-	{
-		//push query results to images array
-		array_push($images,$node);
-	}
-	//return images array
-	return($images);
 }
 
 //hook to modidy wordpress backend image editor
 add_action('admin_print_scripts','twentytwentyproton_admin_print_scripts');
-//**
+/**
  * Add "Before/After"-Option to Wordpress Media Gallery link Options
  * @return none
  */
