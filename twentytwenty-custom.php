@@ -2,7 +2,7 @@
 /*
 Plugin Name: TwentyTwenty Proton
 Plugin URI: http://references.zc.dtdns.net
-Description: Before/After Gallery using a custom version of jquerys twentytwenty plugin
+Description: Before/After Gallery Plugin for Wordpress using Proton
 Version: 1.0
 Author: m.Schreiber
 Author URI: http://references.zc.dtdns.net
