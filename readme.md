@@ -28,4 +28,4 @@ Since there are only two Words used in the Frontend you can just override the us
 ```
 
 ## Usage
-Once installed and activaded the Plugin modifies the Wordpress Media Gallery and adds a new "Link"-Option while creating a Image Gallery for the "gallery"-Shortcode. You just need to select exactly two images, bring them in the right order (before,after) and select the new "Link"-Option: "TwentyTwentyProton".
+Once installed and activated the Plugin modifies the Wordpress Media Gallery and adds a new "Link"-Option while creating a Image Gallery for the "gallery"-Shortcode. You just need to select exactly two images, bring them in the right order (before,after) and select the new "Link"-Option: "TwentyTwentyProton".
