@@ -1,16 +1,17 @@
 # TwentyTwentyProton
 
-Before/After Gallery Plugin for Wordpress using Proton
+Before/After-Image-Gallery Plugin for Wordpress using Proton
 
 ## Requirements
-1. jQuery: [http://jquery.com/](http://jquery.com/)
-2. TwentyTwenty: [https://github.com/zurb/twentytwenty](https://github.com/zurb/twentytwenty)
-3. Proton: [https://github.com/a-jie/Proton](https://github.com/a-jie/Proton)
+1. Wordpress (tested with 4.4.1)
+2. jQuery: [http://jquery.com/](http://jquery.com/)
+3. TwentyTwenty: [https://github.com/zurb/twentytwenty](https://github.com/zurb/twentytwenty)
+4. Proton: [https://github.com/a-jie/Proton](https://github.com/a-jie/Proton)
 
 ## Installation
-Just type "bower install" in the plugin directory to update the requirements using bower.
+Just type "bower install" in the plugin directory to update the requirements using bower or include them yourself.
 
-**ATTENTION:** jQuery is not included because it is present anyway most of the time - so you are responsible for including jquery yourself !
+**ATTENTION:** Bower-Users! jQuery is not included because it is present anyway most of the time - so you are responsible for including jquery yourself !
 
 ## TODO
 ### Localization

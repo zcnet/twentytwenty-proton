@@ -62,7 +62,6 @@ function twentytwentyproton($attrs)
 		$ids = explode(",",$attrs["ids"]);
 		if (count($ids) == 2)
 		{
-			pr($attrs);
 			//get images info
 			$images = array(
 				wp_get_attachment_image_src($ids[0],$attrs["size"]),
